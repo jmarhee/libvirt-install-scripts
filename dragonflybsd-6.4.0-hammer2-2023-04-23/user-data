@@ -1,0 +1,18 @@
+#cloud-config
+users:
+  - name: root
+    lock_passwd: false
+    hashed_passwd: $6$rounds=4096$3adxcZQfwIRJaX5x$SYwjOEMvyRMNLCgyz.EURKrQcAtP9Kx/QwGfErI9sw80OXtlCvZdX9lSlnBSXMe5add4F2rTtGdKXaBGTcQEo1
+    ssh_pwauth: true
+  - name: dragonfly
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDkwdzIMre3GyX0vgVK9cGSoH5Ij92t22KBoxL7QZHxvmMP5Ay/8pAsqL92ujGN5Zt8fkQQeZA3ew0o8Yw71yTGeiuz8yr0f9TQTaOj/0jbFFm1wVfuc7oscZ84wCiZ1+mPyJ19DwR7vBj2MMYf3FMbTei2icaQsR4C/ovaNP147Ym7+mU/oZCZkLogBx2Z33xBintbv8k9kcKwMk2Z+CRFGi7xNUxbnBAATdzOI3Nx6jUGg3pMJAYMMeiJKIA8hYUVIBALQO1M3kCYdyXhfMdNFSoRM2c4gXzzZsVhkC27q1HpI4JalzCzpo2Rmov03DiczxO0Kz3vpJ9eD38x13i/ jmarhee@iampizza-2.local
+    hashed_passwd: $6$rounds=4096$qMX2gRpdwfparXlU$YYy9WfU6tedchwxCBtIfUjXUOx864n5OFTx0MZUR8RyzWnv9VXREtHQ4TGbZD0cksIMXvmpJgpWKRYy7ovCcp1
+    groups: wheel
+    ssh_pwauth: true
+
+write_files:
+  - path: /usr/local/etc/sudoers
+    content: |
+      %wheel ALL=(ALL) NOPASSWD: ALL
+    append: true

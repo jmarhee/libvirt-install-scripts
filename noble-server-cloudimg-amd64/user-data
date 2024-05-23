@@ -1,0 +1,19 @@
+#cloud-config
+users:
+  - name: ubuntu
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDkwdzIMre3GyX0vgVK9cGSoH5Ij92t22KBoxL7QZHxvmMP5Ay/8pAsqL92ujGN5Zt8fkQQeZA3ew0o8Yw71yTGeiuz8yr0f9TQTaOj/0jbFFm1wVfuc7oscZ84wCiZ1+mPyJ19DwR7vBj2MMYf3FMbTei2icaQsR4C/ovaNP147Ym7+mU/oZCZkLogBx2Z33xBintbv8k9kcKwMk2Z+CRFGi7xNUxbnBAATdzOI3Nx6jUGg3pMJAYMMeiJKIA8hYUVIBALQO1M3kCYdyXhfMdNFSoRM2c4gXzzZsVhkC27q1HpI4JalzCzpo2Rmov03DiczxO0Kz3vpJ9eD38x13i/ jmarhee@iampizza-2.local
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    shell: /bin/bash
+runcmd:
+  - hostnamectl set-hostname $(openssl rand -hex 6)
+  - echo PubkeyAuthentication yes | sudo tee -a /etc/ssh/sshd_config
+  - echo PubkeyAcceptedKeyTypes=+ssh-rsa | sudo tee -a /etc/ssh/sshd_config
+  - systemctl restart ssh
+write_files:
+- content: |
+    Ubuntu 22.04 LTS \n \l
+    IPv4: \4{enp1s0}
+  path: /etc/issue
+permissions: '0644'
