@@ -8,7 +8,7 @@ sudo qemu-img create /var/lib/libvirt/images/${CLUSTER_TAG}-${VM_NAME}-ROOT_VOL.
 sudo qemu-img create /var/lib/libvirt/images/${CLUSTER_TAG}-${VM_NAME}-DATA_VOL.img 120G; \
 sudo virt-install \
 --name=${CLUSTER_TAG}-node-${VM_NAME} \
---ram=4196 --vcpus=4 \
+--ram=8196 --vcpus=8 \
 --cdrom=/var/lib/libvirt/images/$1 \
 --os-variant=slem5.2 \
 --disk path=/var/lib/libvirt/images/${CLUSTER_TAG}-${VM_NAME}-ROOT_VOL.img \

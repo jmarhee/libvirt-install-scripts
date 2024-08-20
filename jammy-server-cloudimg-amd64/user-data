@@ -11,6 +11,10 @@ runcmd:
   - echo PubkeyAuthentication yes | sudo tee -a /etc/ssh/sshd_config
   - echo PubkeyAcceptedKeyTypes=+ssh-rsa | sudo tee -a /etc/ssh/sshd_config
   - systemctl restart ssh
+  - wget "https://tailscale.com/install.sh"
+  - chmod +x ./install.sh
+  - /bin/bash ./install.sh
+  - sudo tailscale up --authkey=tskey-auth-ko9dfantt411CNTRL-b1Sna4SR9286wQ3CXkmD289LEd6eKjmR
 write_files:
 - content: |
     Ubuntu 22.04 LTS \n \l
